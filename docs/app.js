@@ -45,7 +45,7 @@ function toast(msg) {
 const store = {
   mode: 'browser', entries: [], stamps: {}, durable: true,
   async init() {
-    try {
+    if (!location.hostname.endsWith('github.io')) try {
       const r = await fetch('/api/local/ping', { cache: 'no-store' });
       if (r.ok && (await r.json()).who === 'local') {
         this.mode = 'local';
