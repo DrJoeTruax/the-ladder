@@ -9,5 +9,16 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 12,
+  "hash": "7b1d49583807f30b80a1656bedd35d69cba9273d855f30941826175f42dde20e",
+  "at": "2026-10-15T13:22:25.163Z",
+  "file": "ots/000012-7b1d49583807.ots",
+  "calendars": [
+   "https://b.pool.opentimestamps.org",
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
