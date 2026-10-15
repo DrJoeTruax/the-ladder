@@ -1,0 +1,13 @@
+[
+ {
+  "seq": 10,
+  "hash": "4a9952730ff3891e07ba7e8ced256e043282e36cc53e266e7684ced144a2a1c0",
+  "at": "2026-10-15T07:57:58.056Z",
+  "file": "ots/000010-4a9952730ff3.ots",
+  "calendars": [
+   "https://b.pool.opentimestamps.org",
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
+ }
+]

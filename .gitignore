@@ -1,0 +1,7 @@
+# Joe's private record (helicopter rounds, personal guesses) never leaves this PC.
+/data/
+node_modules/
+# Joe's working notes and full art boards stay local (the site only uses the cropped tiles in docs/powers).
+CHANGELOG.md
+boards/
+JOE-NOTES.md

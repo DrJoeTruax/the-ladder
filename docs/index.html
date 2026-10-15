@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" data-level="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ladder</title>
+<meta name="description" content="Tools that help people become smarter. Every guess is locked in before the real world answers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="stars"></canvas>
+
+<nav class="top">
+  <a href="#tools"><span class="lv-1">Helpers</span><span class="lv-2">Tools</span><span class="lv-3">Tools</span></a>
+  <a href="#sky">Sky</a>
+  <a href="#desk">Desk</a>
+  <a href="#ladder"><span class="lv-1">Ladder</span><span class="lv-2">Ladder Log</span><span class="lv-3">Ladder Log</span></a>
+  <a href="#locker"><span class="lv-1">Safe box</span><span class="lv-2">Locker</span><span class="lv-3">Locker</span></a>
+  <div class="levels" role="group" aria-label="Reading level">
+    <span class="lbl">Reading level</span>
+    <button type="button" data-set-level="1" aria-pressed="true">Easy</button>
+    <button type="button" data-set-level="2" aria-pressed="false">Standard</button>
+    <button type="button" data-set-level="3" aria-pressed="false">Expert</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="kicker"><span class="lv-1">PART OF 1-1-3: PEACE · STEP ONE</span><span class="lv-2">1-1-3: PEACE · THE PROPOSED PATH · RUNG ONE</span><span class="lv-3">1-1-3: PEACE · BOOTSTRAP TOOLS · RUNG ONE</span></div>
+    <h1>The Ladder</h1>
+    <p class="tag">
+      <span class="lv-1">Smart tools that help people get smarter. They make guesses, and the real world tells us if they were right.</span>
+      <span class="lv-2">Tools that are not alive, raising the person who uses them.</span>
+      <span class="lv-3">Narrow, goal-free tools whose predictions are sealed in advance and scored against reality and stronger baselines.</span>
+    </p>
+    <p class="quote">
+      <span class="lv-1">The big idea: we don't build a robot to be smart for us. We build helpers that make <b>us</b> smarter, one step at a time, like climbing a ladder.</span>
+      <span class="lv-2">“The bootstrap is a set of tools, not a creature. Each is superhuman at one job: <b>designing, predicting, checking</b>. None has goals of its own, and none acts unless a person asks.”</span>
+      <span class="lv-3">“The bootstrap is a set of tools, not a creature. Each is superhuman at one job: <b>designing, predicting, checking</b>.” Rung one tests that claim with pre-registered forecasts and a tamper-evident record.</span>
+    </p>
+    <div class="chips" id="chips"><span class="chip">…</span></div>
+  </div>
+</header>
+
+<main>
+  <section id="tools" class="reveal">
+    <div class="sec-head"><span class="num">I</span><h2><span class="lv-1">Meet the helpers</span><span class="lv-2">Three tools and a Locker</span><span class="lv-3">Three tools and a Locker</span></h2></div>
+    <p class="lede lv-1">There are three helpers and one safe box. Each helper is great at just one job. None of them is alive, and none of them does anything unless a person asks.</p>
+    <p class="lede lv-2">Each tool is a first, working rung toward a power from your thesis. None of them acts on its own. Each one does one job, and the Locker keeps them honest.</p>
+    <p class="lede lv-3">Each component is narrowly capable, has no goals, and runs only when a person asks. The Locker makes every claim tamper-evident, so no result can be quietly adjusted after the fact.</p>
+    <div class="tools">
+      <article class="tool"><img src="powers/blueprints.jpg" alt="Blueprints and Gifts power art">
+        <div class="body"><div class="name">Designer</div>
+        <div class="job"><span class="lv-1">Tries about a thousand paper helicopter shapes in a blink and picks the best one.</span><span class="lv-2">Searches thousands of shapes and picks the one that best meets your goal.</span><span class="lv-3">Exhaustive search over ~1,000 stability-constrained geometries; maximizes predicted fall time or minimizes distance to a target time.</span></div>
+        <div class="rung"><span class="rl">RUNG ONE OF · BLUEPRINTS &amp; GIFTS</span><span class="lv-1">Today it designs paper helicopters.</span><span class="lv-2">Designs a paper helicopter that hits the flight you ask for.</span><span class="lv-3">Desk proving ground; generalizes to any simulate-then-verify design problem.</span></div></div></article>
+      <article class="tool"><img src="powers/what-if-sight.jpg" alt="What-If Sight power art">
+        <div class="body"><div class="name">Predictor</div>
+        <div class="job"><span class="lv-1">Guesses what will happen before it happens.</span><span class="lv-2">Says what will happen before it happens, with an honest range.</span><span class="lv-3">Point forecast plus an 80% interval; versions are frozen and sealed before use.</span></div>
+        <div class="rung"><span class="rl">RUNG ONE OF · WHAT-IF SIGHT</span><span class="lv-1">Today it guesses space weather and how long a paper helicopter falls.</span><span class="lv-2">Calls Earth's space weather and the helicopter's fall time in advance.</span><span class="lv-3">Kp 3-hour blocks (Newell coupling + persistence) and descent time (one-parameter drag model).</span></div></div></article>
+      <article class="tool"><img src="powers/bias-check.jpg" alt="Bias Check power art">
+        <div class="body"><div class="name">Checker</div>
+        <div class="job"><span class="lv-1">Checks every guess against what really happened. No fudging allowed.</span><span class="lv-2">Scores every guess against reality and against simpler rivals.</span><span class="lv-3">Scores against observed outcomes and against baselines: NOAA SWPC's forecast, persistence, and the human.</span></div>
+        <div class="rung"><span class="rl">RUNG ONE OF · BIAS CHECK</span><span class="lv-1">Today it grades our helper against real scientists, and against you.</span><span class="lv-2">Grades the tool against NOAA, plain repetition and you.</span><span class="lv-3">Mean absolute error per source; interval coverage for desk rounds.</span></div></div></article>
+      <article class="tool"><img src="powers/perfect-memory.jpg" alt="Perfect Memory power art">
+        <div class="body"><div class="name"><span class="lv-1">The Safe Box</span><span class="lv-2">The Locker</span><span class="lv-3">The Locker</span></div>
+        <div class="job"><span class="lv-1">Once a guess goes in, nobody can change it. Not you, not us, not anyone.</span><span class="lv-2">Seals every guess with a fingerprint. Nothing can be quietly changed later.</span><span class="lv-3">Append-only log; each entry's SHA-256 covers its content and the previous hash, so any edit or deletion fails verification.</span></div>
+        <div class="rung"><span class="rl">RUNG ONE OF · PERFECT MEMORY</span><span class="lv-1">A memory that can't be changed or faked.</span><span class="lv-2">A record where history can't be rewritten.</span><span class="lv-3">Internal integrity only; public anchoring of the head hash is the next step.</span></div></div></article>
+    </div>
+  </section>
+
+  <section id="sky" class="reveal">
+    <div class="sec-head"><span class="num">II</span><h2><span class="lv-1">Sky: guessing space weather</span><span class="lv-2">Sky: calling space weather</span><span class="lv-3">Sky: geomagnetic Kp forecasting</span></h2></div>
+    <p class="lede lv-1">The Sun is always blowing a wind out into space. A spacecraft far away feels it first, about an hour before it reaches Earth. Every 3 hours, our helper guesses how much that wind will shake Earth's magnetic field. The scale goes from 0 (calm) to 9 (a huge storm with bright northern lights). Scientists at <b>NOAA</b>, America's weather and space-weather agency, make their guess too. Then the real number comes in, and we see who was closest.</p>
+    <p class="lede lv-2">Right now, a spacecraft 1.5 million km away is measuring the solar wind before it reaches Earth. Every three hours the Predictor seals a guess for how stirred-up Earth's magnetic field will get (the <b>Kp</b> scale, 0 calm to 9 extreme storm). Then NOAA's measurement scores it. Its rivals are <b>NOAA's own forecasters</b>, and a lazy guess that just repeats the last value.</p>
+    <p class="lede lv-3">Real-time solar wind (plasma and IMF in GSM) from the active L1 spacecraft via NOAA SWPC RTSW. For each 3-hour UT block, a Kp forecast is sealed before the block starts. It blends the Newell et al. (2008) coupling relation, averaged over the last 60 minutes, with persistence. The SWPC forecast and persistence are sealed at the same moment as baselines. Everything is scored by absolute error against SWPC's preliminary planetary Kp.</p>
+    <div class="banner"><img src="powers/light-year-vision.jpg" alt=""><div class="over"><div class="power">LIGHT-YEAR VISION · RUNG ONE</div><div class="say"><span class="lv-1">Seeing what the Sun is sending before it gets here.</span><span class="lv-2">Seeing what's coming from the Sun before it lands.</span><span class="lv-3">A 30–60 minute upstream view, extended by a 0–3 hour forecast horizon.</span></div></div></div>
+    <div class="grid3" id="sky-live"></div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="seal-card" id="sky-seal"></div>
+      <div class="panel" id="sky-score"></div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3><span class="lv-1">The Sun's wind over the last day</span><span class="lv-2">The last day of solar wind</span><span class="lv-3">24-hour driver vs. observed Kp</span></h3>
+      <div id="sky-chart"></div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3><span class="lv-1">Every locked-in guess</span><span class="lv-2">Every sealed call</span><span class="lv-3">Forecast ledger</span></h3>
+      <div class="table-wrap" id="sky-table"></div>
+    </div>
+  </section>
+
+  <section id="desk" class="reveal">
+    <div class="sec-head"><span class="num">III</span><h2><span class="lv-1">Desk: the paper helicopter</span><span class="lv-2">Desk: the paper helicopter</span><span class="lv-3">Desk: rotor descent forecasting</span></h2></div>
+    <p class="lede lv-1">You can do this one at home! All you need is paper, scissors, a paper clip and a phone timer. The helper picks a shape. <b>You guess first</b>: how many seconds will it take to fall? Then the helper's guess gets locked in too. Drop it, time it, and see who was closer. Every time you play, the helper learns and gets a little better.</p>
+    <p class="lede lv-2">A test you can run at your desk with paper, scissors, a paper clip and your phone's stopwatch. The Designer picks the shape. <b>You guess first</b>, then the Predictor seals its own guess. You drop it and the Checker scores you both. After every drop the tool learns, so its next guess should get closer. That's the ladder you can watch.</p>
+    <p class="lede lv-3">A physical forecasting task with a human comparison arm. The model is steady descent: mg = ½ρC<sub>d</sub>Av² with blade area A, and t = h/v + v/2g. It has one free parameter, ln C<sub>d</sub>, with a normal prior that each round's implied C<sub>d</sub> updates. The human forecast is sealed before the model's output is shown.</p>
+    <div class="banner"><img src="powers/see-how-things-work.jpg" alt=""><div class="over"><div class="power">SEE HOW THINGS WORK · RUNG ONE</div><div class="say"><span class="lv-1">Paper, air and gravity. Guess first, then find out.</span><span class="lv-2">Paper, air and gravity, guessed in advance and checked by hand.</span><span class="lv-3">One learned constant, checked against a stopwatch.</span></div></div></div>
+    <div class="grid2">
+      <div class="panel" id="desk-flow"></div>
+      <div class="panel" id="desk-side"></div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3><span class="lv-1">Every round</span><span class="lv-2">Every round</span><span class="lv-3">Round ledger</span></h3>
+      <div class="table-wrap" id="desk-table"></div>
+    </div>
+  </section>
+
+  <section id="ladder" class="reveal">
+    <div class="sec-head"><span class="num">IV</span><h2><span class="lv-1">The Ladder: are we getting smarter?</span><span class="lv-2">The Ladder Log</span><span class="lv-3">The Ladder Log</span></h2></div>
+    <p class="lede lv-1">This is the big question: do these helpers really help a person do things they couldn't do before? We only write a step here once the real world proves it.</p>
+    <p class="lede lv-2">The thesis claim, measured: <b>with the tools, can a person do what they couldn't before?</b> Rungs are only written from sealed, scored results, plus your own sealed notes.</p>
+    <p class="lede lv-3">The thesis's central empirical claim: does tool-assisted human performance exceed unassisted performance on held-out, pre-registered tasks? Rungs are derived only from resolved, sealed records.</p>
+    <div class="banner"><img src="powers/superintelligence.jpg" alt=""><div class="over"><div class="power">SUPERINTELLIGENCE · THE TOP OF THE LADDER</div><div class="say"><span class="lv-1">People get smarter. The helpers stay helpers.</span><span class="lv-2">The human is the one who rises. The tools stay tools.</span><span class="lv-3">The human is the one who rises. The tools stay tools.</span></div></div></div>
+    <div class="grid2">
+      <div class="panel"><h3><span class="lv-1">Steps we've proven</span><span class="lv-2">Rungs, from the record</span><span class="lv-3">Derived rungs</span></h3><div id="rungs"></div></div>
+      <div class="panel"><h3><span class="lv-1">Add your own step</span><span class="lv-2">Add a rung of your own</span><span class="lv-3">Add a rung</span></h3>
+        <p class="muted" style="margin-top:0"><span class="lv-1">Write down something you can do now that you couldn't do before. It gets locked in with the date and time.</span><span class="lv-2">Something you can now do that you couldn't before. It gets sealed in the Locker with a timestamp.</span><span class="lv-3">A self-reported capability claim, sealed with timestamp and optional evidence pointer.</span></p>
+        <label for="rung-text"><span class="lv-1">What can you do now?</span><span class="lv-2">What can you do now?</span><span class="lv-3">Claim</span></label>
+        <input id="rung-text" placeholder="e.g. I guessed a helicopter's fall within 10%">
+        <label for="rung-ev" style="margin-top:10px"><span class="lv-1">How do you know? (optional)</span><span class="lv-2">Evidence (optional)</span><span class="lv-3">Evidence (optional)</span></label>
+        <input id="rung-ev" placeholder="a link, a file name, a round number">
+        <div style="margin-top:12px"><button id="rung-add"><span class="lv-1">Lock in this step</span><span class="lv-2">Seal this rung</span><span class="lv-3">Seal</span></button></div>
+        <div id="notes" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="locker" class="reveal">
+    <div class="sec-head"><span class="num">V</span><h2><span class="lv-1">The Safe Box</span><span class="lv-2">The Locker</span><span class="lv-3">The Locker</span></h2></div>
+    <p class="lede lv-1">Every guess and every answer goes in here, in order. Each one is locked to the one before it, like links in a chain. If anyone changes even one letter, the chain breaks and this box turns red.</p>
+    <p class="lede lv-2">Every model, guess and result in one chain. Each entry carries a fingerprint of itself and of the one before it. Change a single character anywhere and the check below turns red.</p>
+    <p class="lede lv-3">Append-only JSONL; hash = SHA-256(canonical JSON of {seq, type, at, body, prev}); verification recomputes every hash and link in your browser. External anchoring via OpenTimestamps establishes <i>when</i>.</p>
+    <div class="grid2">
+      <div class="panel">
+        <h3><span class="lv-1">The public record</span><span class="lv-2">The public record</span><span class="lv-3">Public chain (sky)</span></h3>
+        <div id="locker-public-verify"></div>
+        <div id="locker-proof" style="margin:12px 0"></div>
+        <div id="locker-public-list"></div>
+      </div>
+      <div class="panel">
+        <h3><span class="lv-1">Your own record</span><span class="lv-2">Your own record</span><span class="lv-3">Personal chain</span></h3>
+        <div id="locker-mine"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="serif">THE LADDER</div>
+  <div>Part of 1-1-3: Peace and SphereShift Labs · Space data: NOAA Space Weather Prediction Center · Kp formula: Newell et al. 2008 · Time-stamps: OpenTimestamps · <a href="https://github.com/DrJoeTruax/the-ladder" style="color:var(--gold)">Open source</a></div>
+</footer>
+<div class="toast" id="toast"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

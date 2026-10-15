@@ -1,0 +1,32 @@
+# The Ladder's engine: every 30 minutes, seal the next space-weather call,
+# score finished ones, refresh the live snapshot and time-stamp the record.
+name: Ladder tick
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ladder-tick
+  cancel-in-progress: false
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run one tick
+        run: node engine/tick.mjs
+      - name: Save the record
+        run: |
+          git config user.name "the-ladder-engine"
+          git config user.email "the-ladder-engine@users.noreply.github.com"
+          git add docs/data
+          if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
+          git commit -m "tick $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase --quiet && git push && exit 0; sleep 5; done
+          exit 1

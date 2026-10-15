@@ -1,0 +1,6 @@
+{
+  "name": "the-ladder",
+  "private": true,
+  "type": "module",
+  "description": "Tools that help people get smarter: sealed guesses, scored by reality."
+}
