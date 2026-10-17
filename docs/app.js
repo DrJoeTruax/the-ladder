@@ -7,6 +7,7 @@ import * as desk from './lib/desk.js';
 import { parseJsonl, verifyChain, makeEntry } from './lib/chain.js';
 import { stamp, toBase64, fromBase64 } from './lib/ots.js';
 import * as S from './lib/state.js';
+import { readSolarWind, readKp } from './lib/sky.js';
 
 const PUBLIC_SITE = 'https://drjoetruax.github.io/the-ladder/';
 const REPO = 'https://github.com/DrJoeTruax/the-ladder';
@@ -117,7 +118,21 @@ async function getPublic(path) {
 async function loadPublic() {
   const [lockerRes, liveRes, stampsRes] = await Promise.all([getPublic('data/sky-locker.jsonl'), getPublic('data/live.json'), getPublic('data/stamps.json').catch(() => ({ text: '[]' }))]);
   const entries = parseJsonl(lockerRes.text);
-  return { entries, live: JSON.parse(liveRes.text), stamps: JSON.parse(stampsRes.text), from: lockerRes.from, verify: await verifyChain(entries) };
+  const live = JSON.parse(liveRes.text);
+  live.engineAt = live.at;
+  // Live numbers straight from NOAA (it allows browsers to read its data), so the page is
+  // current even when GitHub runs the engine late. The engine's snapshot is the fallback.
+  try {
+    const [wind, kp] = await Promise.all([readSolarWind(), readKp()]);
+    const iso = (ms) => new Date(ms).toISOString().slice(0, 19);
+    Object.assign(live, {
+      at: new Date().toISOString(), direct: true, error: null,
+      wind: { ...wind.latest, at: new Date(wind.latest.t).toISOString() }, hour: wind.hour, trail: wind.trail,
+      lastKp: kp.lastObserved ? { block: iso(kp.lastObserved.t), kp: kp.lastObserved.kp } : live.lastKp,
+      observedRecent: [...kp.observed.entries()].sort((a, b) => a[0] - b[0]).slice(-16).map(([t, v]) => ({ block: iso(t), kp: v })),
+    });
+  } catch { live.direct = false; }
+  return { entries, live, stamps: JSON.parse(stampsRes.text), from: lockerRes.from, verify: await verifyChain(entries) };
 }
 
 async function load() {
@@ -178,10 +193,12 @@ function renderChips() {
   const dot = `<span class="dot" style="${v.ok ? '' : 'background:var(--bad);box-shadow:0 0 10px var(--bad)'}"></span>`;
   const lastStamp = pub.stamps[pub.stamps.length - 1];
   const fresh = (Date.now() - Date.parse(pub.live.at)) / 60000;
+  const engineHours = (Date.now() - Date.parse(pub.live.engineAt)) / 3600000;
   $('#chips').innerHTML = `
     <span class="chip ${v.ok ? 'ok' : 'bad'}">${dot}${L(v.ok ? 'Public record: <b>nothing changed</b>' : 'Public record: <b>SOMETHING CHANGED</b>', `Public Locker <b>${v.ok ? 'intact' : 'BROKEN'}</b> · ${v.count} entries`, `Public chain <b>${v.ok ? 'verified' : 'BROKEN'}</b> · ${v.count} entries`)}</span>
     ${lastStamp ? `<span class="chip">${L('Stamped into Bitcoin\'s timeline', 'Fingerprint public', 'OTS-anchored')} <b>${ago(lastStamp.at)}</b></span>` : ''}
-    <span class="chip">${L('Space data updated', 'Updated', 'live.json')} <b>${ago(pub.live.at)}</b>${fresh > 90 ? ` <span class="bad">${L('(late)', '(late)', '(stale)')}</span>` : ''}</span>
+    <span class="chip">${pub.live.direct ? L('Space data: <b>live from NOAA</b>', 'Live from NOAA <b>' + ago(pub.live.at) + '</b>', 'RTSW/Kp fetched client-side <b>' + ago(pub.live.at) + '</b>') : `${L('Space data updated', 'Updated', 'live.json')} <b>${ago(pub.live.at)}</b>${fresh > 90 ? ` <span class="bad">${L('(late)', '(late)', '(stale)')}</span>` : ''}`}</span>
+    ${engineHours > 7 ? `<span class="chip bad">${L('The guessing helper is running late', 'The engine is behind', 'Engine stale')}: <b>${ago(pub.live.engineAt)}</b></span>` : ''}
     <span class="chip">${L('Next space guess', 'Next sky window', 'Next Kp block')} <b>${windowWords(STATE.nextBlock)}</b></span>
     ${pub.live.error ? `<span class="chip bad">${L('Space data had a problem', 'NOAA feed', 'SWPC feed error')}: <b>${esc(pub.live.error)}</b></span>` : ''}`;
 }
