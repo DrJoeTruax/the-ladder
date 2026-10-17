@@ -23,6 +23,12 @@ if (!check.ok) { console.error('The Locker failed its check, refusing to add to 
 const startHead = locker.head;
 
 const skySeals = () => locker.ofType('seal').filter((e) => e.body.kind === 'sky');
+// the call that counts for each window: the latest one sealed before the window started
+const chosenSeals = () => {
+  const best = new Map();
+  for (const s of skySeals()) if (Date.parse(s.at) < Date.parse(s.body.block + 'Z')) best.set(s.body.block, s);
+  return [...best.values()];
+};
 const resultFor = (hash) => locker.ofType('result').find((e) => e.body.seal === hash);
 function currentSkyModel() {
   const models = locker.ofType('model').filter((e) => e.body.kind === 'sky-model');
@@ -56,7 +62,7 @@ if (kp) {
 
   // 2. Re-learn from sealed history (12+ scored, then every 8 more). A new version
   //    is sealed before use and only judged on windows after it.
-  const rows = skySeals().map((s) => ({ s, r: resultFor(s.hash) })).filter((x) => x.r)
+  const rows = chosenSeals().map((s) => ({ s, r: resultFor(s.hash) })).filter((x) => x.r)
     .map(({ s, r }) => ({ newellKp: s.body.inputs.newellKp, persistence: s.body.inputs.persistence, observed: r.body.observed }));
   const model = currentSkyModel();
   if (rows.length >= 12 && rows.length - (model.trainedOn ?? 0) >= 8) {
@@ -69,24 +75,33 @@ if (kp) {
   }
 }
 
-// 3. Seal the next window's call, if it isn't sealed yet. Always before the window starts.
+// 3. Seal calls, always before the window starts. GitHub's schedule can skip hours,
+//    so each run makes two kinds of call:
+//    - a LATE call for the next window (sealed within 3 hours of its start), and
+//    - an EARLY call for the window after that (3 to 6 hours ahead), as a backup.
+//    Fixed in advance: each window is scored on its LATEST call sealed before it
+//    starts, so the choice never depends on the answer.
 if (wind && kp && kp.lastObserved && wind.hour.count) {
   const now = Date.now();
-  const target = sky.nextBlock(now);
-  const block = sky.isoBlock(target);
-  if (!skySeals().some((s) => s.body.block === block)) {
-    const model = currentSkyModel();
-    const inputs = {
-      newellKp: +wind.hour.newellKp.toFixed(3), persistence: kp.lastObserved.kp, persistenceBlock: sky.isoBlock(kp.lastObserved.t),
-      windMinutes: wind.hour.count, windAt: new Date(wind.latest.t).toISOString(),
-      speed: Math.round(wind.hour.v), bz: +wind.hour.bz.toFixed(2), density: +wind.hour.n.toFixed(2),
-    };
+  const model = currentSkyModel();
+  const inputs = {
+    newellKp: +wind.hour.newellKp.toFixed(3), persistence: kp.lastObserved.kp, persistenceBlock: sky.isoBlock(kp.lastObserved.t),
+    windMinutes: wind.hour.count, windAt: new Date(wind.latest.t).toISOString(),
+    speed: Math.round(wind.hour.v), bz: +wind.hour.bz.toFixed(2), density: +wind.hour.n.toFixed(2),
+  };
+  const seal = (target, call) => {
     const e = locker.append('seal', {
-      kind: 'sky', block, leadMinutes: Math.round((target - now) / 60000), model: { id: model.id, w: model.w }, inputs,
+      kind: 'sky', block: sky.isoBlock(target), call, leadMinutes: Math.round((target - now) / 60000), model: { id: model.id, w: model.w }, inputs,
       prediction: sky.predictWith(model, inputs), rivals: { persistence: inputs.persistence, noaa: kp.noaa.get(target) ?? null },
     });
-    log('sealed', block, 'prediction', e.body.prediction);
-  }
+    log('sealed', call, e.body.block, 'prediction', e.body.prediction);
+  };
+  const next = sky.nextBlock(now);
+  const sealsFor = (t) => skySeals().filter((s) => s.body.block === sky.isoBlock(t));
+  // late call: none yet sealed inside the 3 hours before this window
+  if (!sealsFor(next).some((s) => Date.parse(s.at) >= next - sky.BLOCK_MS)) seal(next, 'late');
+  // early call for the window after: only if it has no call at all
+  if (!sealsFor(next + sky.BLOCK_MS).length) seal(next + sky.BLOCK_MS, 'early');
 }
 
 // 4. Live snapshot for the website (the page never needs to call NOAA itself).
@@ -99,7 +114,9 @@ const live = {
   upcoming: kp ? [...kp.noaa.entries()].filter(([t]) => t >= sky.blockStart(Date.now())).slice(0, 8).map(([t, v]) => ({ block: sky.isoBlock(t), noaa: v.kp })) : [],
   model: currentSkyModel(),
 };
-writeFileSync(join(DATA, 'live.json'), JSON.stringify(live));
+const LIVE = join(DATA, 'live.json');
+const prevLiveAt = existsSync(LIVE) ? Date.parse(JSON.parse(readFileSync(LIVE, 'utf8')).at || 0) : 0;
+if (locker.head !== startHead || Date.now() - prevLiveAt > 25 * 60 * 1000 || error) writeFileSync(LIVE, JSON.stringify(live));
 
 // 5. Public fingerprint: stamp the newest entry whenever the record grew.
 const stamps = existsSync(STAMPS) ? JSON.parse(readFileSync(STAMPS, 'utf8')) : [];

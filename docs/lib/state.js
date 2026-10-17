@@ -20,11 +20,16 @@ export function currentModel(entries, kind) {
 }
 
 // ---------- public sky record ----------
+// One row per window. A window can have an early call (3-6 h ahead) and a late call
+// (0-3 h ahead); fixed in advance, the one that counts is the LATEST call sealed before
+// the window started. That rule never depends on the answer, so it can't cherry-pick.
 export function skyRows(entries) {
   const results = resultsBySeal(entries);
-  return entries.filter((e) => e.type === 'seal' && e.body.kind === 'sky').map((s) => {
+  const chosen = new Map();
+  for (const e of entries) if (e.type === 'seal' && e.body.kind === 'sky' && Date.parse(e.at) < blockMs(e.body.block)) chosen.set(e.body.block, e);
+  return [...chosen.values()].sort((a, b) => blockMs(a.body.block) - blockMs(b.body.block)).map((s) => {
     const r = results.get(s.hash);
-    return { block: s.body.block, sealedAt: s.at, hash: s.hash, seq: s.seq, model: s.body.model.id, prediction: s.body.prediction, rivals: s.body.rivals, inputs: s.body.inputs, leadMinutes: s.body.leadMinutes, observed: r?.body.observed ?? null, errors: r?.body.errors ?? null };
+    return { block: s.body.block, sealedAt: s.at, hash: s.hash, seq: s.seq, model: s.body.model.id, prediction: s.body.prediction, rivals: s.body.rivals, inputs: s.body.inputs, leadMinutes: s.body.leadMinutes, call: s.body.call || 'late', observed: r?.body.observed ?? null, errors: r?.body.errors ?? null };
   });
 }
 

@@ -83,6 +83,16 @@ personal.push(await chain.makeEntry(personal, 'seal', { kind: 'sky-guess', block
 const guesses = S.mySkyGuesses(personal, S.observedMap(real.entries, null));
 check('your guesses get scored against the public answer', guesses[0].observed === rows[0].observed);
 
+// early + late calls: the latest call sealed BEFORE the window counts; calls after the start never count
+const calls = [];
+const blk = '2026-10-20T12:00:00';
+const mk = async (at, prediction) => calls.push(await chain.makeEntry(calls, 'seal', { kind: 'sky', block: blk, model: { id: 'm' }, prediction, rivals: {}, inputs: {} }, at));
+await mk('2026-10-20T07:00:00.000Z', 1.0); // early call
+await mk('2026-10-20T10:30:00.000Z', 2.0); // late call
+await mk('2026-10-20T12:30:00.000Z', 9.0); // after the window started: must be ignored
+const chosen = S.skyRows(calls);
+check('one row per window, using the latest call sealed before it', chosen.length === 1 && chosen[0].prediction === 2.0, `picked ${chosen[0]?.prediction}`);
+
 // ---- Desk ----
 const prior = desk.calibrate([]);
 const std = desk.predict(desk.STANDARD, 2.4, prior);
