@@ -5,3 +5,5 @@ node_modules/
 CHANGELOG.md
 boards/
 JOE-NOTES.md
+# PC-only helper (the scheduled nudge); stays local
+tools/
