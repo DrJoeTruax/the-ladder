@@ -10,6 +10,8 @@ import * as S from './lib/state.js';
 
 const PUBLIC_SITE = 'https://drjoetruax.github.io/the-ladder/';
 const REPO = 'https://github.com/DrJoeTruax/the-ladder';
+// Your private copy runs on this PC; the public copies are GitHub Pages and sphereshiftlabs.com/ladder/.
+const ON_MY_PC = ['127.0.0.1', 'localhost', '[::1]'].includes(location.hostname);
 
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -45,7 +47,7 @@ function toast(msg) {
 const store = {
   mode: 'browser', entries: [], stamps: {}, durable: true,
   async init() {
-    if (!location.hostname.endsWith('github.io')) try {
+    if (ON_MY_PC) try {
       const r = await fetch('/api/local/ping', { cache: 'no-store' });
       if (r.ok && (await r.json()).who === 'local') {
         this.mode = 'local';
@@ -100,7 +102,7 @@ const store = {
 // ---------- the public record ----------
 async function getPublic(path) {
   const bust = `?t=${Math.floor(Date.now() / 60000)}`;
-  const bases = location.hostname.endsWith('github.io') ? ['./'] : [PUBLIC_SITE, './'];
+  const bases = ON_MY_PC ? [PUBLIC_SITE, './'] : ['./'];
   let lastErr;
   for (const base of bases) {
     try {
@@ -559,7 +561,7 @@ function renderLockers() {
   const { pub } = STATE;
   const stamped = new Set(pub.stamps.map((s) => s.hash));
   const last = pub.stamps[pub.stamps.length - 1];
-  const base = location.hostname.endsWith('github.io') ? './' : PUBLIC_SITE;
+  const base = ON_MY_PC ? PUBLIC_SITE : './';
   $('#locker-public-verify').innerHTML = `${verifyLine(pub.verify, ['entries'])}<div class="hash">${L('', `head ${pub.verify.head}`, `head ${pub.verify.head}`)}</div>`;
   $('#locker-proof').innerHTML = last
     ? `<div class="note">${L(
