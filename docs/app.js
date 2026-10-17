@@ -219,7 +219,7 @@ function renderSkySeal() {
         <div class="row"><input id="joe-kp" type="number" min="0" max="9" step="0.33" placeholder="e.g. 2.33"><button id="joe-kp-seal" style="flex:0 0 auto">${L('Lock in my guess', 'Seal my guess', 'Seal forecast')}</button></div></div>`;
   if (!row) {
     $('#sky-seal').innerHTML = `<div class="wax">SEAL</div><h3>${L('Next guess', 'Next call', 'Next sealed forecast')}</h3>
-      <p class="muted">${L(`Our helper locks in its guess for <b>${windowWords(nextBlock)}</b> soon. It checks every half hour.`, `The engine seals its call for <b>${windowWords(nextBlock)}</b> on its next run (every 30 minutes, on GitHub).`, `Seal for block ${esc(nextBlock)}Z pending on the next scheduled run.`)}</p>${joeBox}`;
+      <p class="muted">${L(`Our helper locks in its guess for <b>${windowWords(nextBlock)}</b> soon. It checks in often, every few minutes when it can.`, `The engine seals its call for <b>${windowWords(nextBlock)}</b> on its next run (on GitHub, as often as every 5 minutes; each window also gets an early backup call 3–6 hours ahead).`, `Seal for block ${esc(nextBlock)}Z pending on the next scheduled run (cron */5; GitHub schedule latency applies). Scoring rule: latest call sealed before block start.`)}</p>${joeBox}`;
   } else {
     const noaa = row.rivals.noaa;
     const inp = row.inputs;

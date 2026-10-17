@@ -8,7 +8,7 @@ The Ladder is the first working step of *1-1-3: Peace*, a thesis by Dr. Joe Trua
 
 ## What's here
 
-**Sky: space-weather forecasting, scored by reality.** Every 30 minutes, an automatic job ([`.github/workflows/tick.yml`](.github/workflows/tick.yml)) reads the solar wind from NOAA's spacecraft. Before each 3-hour window starts, it seals a forecast of Earth's geomagnetic activity (the Kp index, 0–9). NOAA's own forecast and a plain "same as last time" guess are sealed next to it as rivals. Once NOAA publishes the measurement, all of them are scored. Visitors can seal their own guesses too.
+**Sky: space-weather forecasting, scored by reality.** As often as GitHub allows (it asks every 5 minutes), an automatic job ([`.github/workflows/tick.yml`](.github/workflows/tick.yml)) reads the solar wind from NOAA's spacecraft. Before each 3-hour window starts, it seals a forecast (a backup "early" call 3–6 hours ahead, plus a "late" call within 3 hours; the window is always scored on the latest call sealed before it starts, a rule fixed in advance) of Earth's geomagnetic activity (the Kp index, 0–9). NOAA's own forecast and a plain "same as last time" guess are sealed next to it as rivals. Once NOAA publishes the measurement, all of them are scored. Visitors can seal their own guesses too.
 
 **Desk: the paper helicopter.** A physical test anyone can do with paper, scissors, a paper clip and a phone timer. The Designer picks a shape, you guess first, then the Predictor's guess is sealed. You drop it and time it, both guesses are scored, and the tool learns from the result.
 
@@ -38,7 +38,7 @@ Needs Node 20 or newer, and nothing else to install.
 
 ```bash
 node server.mjs          # the website at http://127.0.0.1:8777, with a private personal record in data/
-node engine/tick.mjs     # one engine tick (what GitHub runs every 30 minutes)
+node engine/tick.mjs     # one engine tick (what GitHub runs on its schedule)
 node tests/run-tests.mjs # the self-checks
 ```
 
