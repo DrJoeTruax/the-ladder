@@ -2,7 +2,7 @@
 
 **Tools that help people get smarter, where every guess is locked in before the real world answers.**
 
-Live site: **https://drjoetruax.github.io/the-ladder/** (with Easy, Standard and Expert reading levels)
+Live site: **https://sphereshiftlabs.com/ladder/** (also at https://drjoetruax.github.io/the-ladder/), with Easy, Standard and Expert reading levels
 
 The Ladder is the first working step of *1-1-3: Peace*, a thesis by Dr. Joe Truax about reaching superintelligence through "a set of tools, not a creature." Each tool is great at one job (designing, predicting or checking), has no goals of its own, and only acts when a person asks. The question this project measures is simple: **with the tools, can a person do things they couldn't do before?**
 
