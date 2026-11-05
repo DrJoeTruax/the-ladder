@@ -1857,5 +1857,15 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 666,
+  "hash": "58a0e6897fee9e8daa362ce0f625ac95c8bfcedf64ab97f4ba1be3b93c0de980",
+  "at": "2026-11-05T15:16:53.562Z",
+  "file": "ots/000666-58a0e6897fee.ots",
+  "calendars": [
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
