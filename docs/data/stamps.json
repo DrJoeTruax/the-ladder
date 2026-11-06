@@ -1944,5 +1944,15 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 699,
+  "hash": "ac24aeb488142a3a31e5c20e3df34fda00c5b3c49516361325bd9ba687619ea4",
+  "at": "2026-11-06T15:16:53.092Z",
+  "file": "ots/000699-ac24aeb48814.ots",
+  "calendars": [
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
