@@ -1965,5 +1965,16 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 707,
+  "hash": "6cc4aab4c9770ab518baca6f7f8dfe35c15fef46bb31776d646268fe43eb2889",
+  "at": "2026-11-06T21:16:50.871Z",
+  "file": "ots/000707-6cc4aab4c977.ots",
+  "calendars": [
+   "https://b.pool.opentimestamps.org",
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
