@@ -1987,5 +1987,16 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 716,
+  "hash": "b6ac582bcc65f875c4508df1b0a37fac2b6d75decda2a6e20a4bf844963aa231",
+  "at": "2026-11-07T03:05:51.773Z",
+  "file": "ots/000716-b6ac582bcc65.ots",
+  "calendars": [
+   "https://b.pool.opentimestamps.org",
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
