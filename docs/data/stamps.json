@@ -1976,5 +1976,16 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 712,
+  "hash": "1c3fbf64018d96c753c197e4d43175e3acc9f2271e476b04ecf0f2927f934ea0",
+  "at": "2026-11-07T00:16:51.673Z",
+  "file": "ots/000712-1c3fbf64018d.ots",
+  "calendars": [
+   "https://b.pool.opentimestamps.org",
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
