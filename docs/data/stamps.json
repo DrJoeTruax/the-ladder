@@ -2075,5 +2075,15 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 752,
+  "hash": "310c5b0690affc581d32d92a1f2e033b14fd74d7d93d2e4e05b40034fd3ed432",
+  "at": "2026-11-08T09:36:17.959Z",
+  "file": "ots/000752-310c5b0690af.ots",
+  "calendars": [
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
