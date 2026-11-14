@@ -2314,5 +2314,15 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 844,
+  "hash": "8f3ac5fb59ff315123da7e5f459df3deb0a31f77c9ea2d7dd6fd4800ccd516ca",
+  "at": "2026-11-14T08:08:58.311Z",
+  "file": "ots/000844-8f3ac5fb59ff.ots",
+  "calendars": [
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
