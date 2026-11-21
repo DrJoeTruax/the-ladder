@@ -2599,5 +2599,16 @@
    "https://a.pool.eternitywall.com",
    "https://finney.calendar.eternitywall.com"
   ]
+ },
+ {
+  "seq": 953,
+  "hash": "b21d3013c4be632a2f5767b71e63ede7bc5156b5b677511e058165d607585060",
+  "at": "2026-11-21T17:54:03.784Z",
+  "file": "ots/000953-b21d3013c4be.ots",
+  "calendars": [
+   "https://b.pool.opentimestamps.org",
+   "https://a.pool.eternitywall.com",
+   "https://finney.calendar.eternitywall.com"
+  ]
  }
 ]
